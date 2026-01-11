@@ -1,4 +1,4 @@
-import { CMS_NAME } from "@/lib/constants";
+import { CMS_NAME } from "@/lib/constants"
 
 export function Intro() {
   return (
@@ -17,5 +17,5 @@ export function Intro() {
         and {CMS_NAME}.
       </h4>
     </section>
-  );
+  )
 }

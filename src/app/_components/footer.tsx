@@ -1,5 +1,5 @@
-import Container from "@/app/_components/container";
-import { EXAMPLE_PATH } from "@/lib/constants";
+import Container from "@/app/_components/container"
+import { EXAMPLE_PATH } from "@/lib/constants"
 
 export function Footer() {
   return (
@@ -26,7 +26,7 @@ export function Footer() {
         </div>
       </Container>
     </footer>
-  );
+  )
 }
 
-export default Footer;
+export default Footer
