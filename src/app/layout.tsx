@@ -4,6 +4,8 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import cn from "classnames"
 import { ThemeSwitcher } from "./_components/theme-switcher"
+import { draftMode } from "next/headers"
+import Alert from "@/components/alert"
 
 import "./globals.css"
 
@@ -17,11 +19,13 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const { isEnabled } = await draftMode()
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -60,6 +64,7 @@ export default function RootLayout({
       <body
         className={cn(inter.className, "dark:bg-slate-900 dark:text-slate-400")}
       >
+        <Alert preview={isEnabled} />
         <ThemeSwitcher />
         <div className="min-h-screen">{children}</div>
         <Footer />
