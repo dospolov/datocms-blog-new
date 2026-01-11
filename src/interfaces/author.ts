@@ -1,4 +1,8 @@
 export type Author = {
-  name: string
-  picture: string
+  name?: string | null
+  picture?: {
+    responsiveImage?: {
+      src?: string | null
+    } | null
+  } | null
 }

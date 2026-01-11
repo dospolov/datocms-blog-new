@@ -6,7 +6,16 @@ query HomePage {
     date
     coverImage {
       responsiveImage(imgixParams: { fm: jpg, fit: crop, w: 2000, h: 1000 }) {
-        ...responsiveImageFragment
+        srcSet
+        webpSrcSet
+        sizes
+        src
+        width
+        height
+        aspectRatio
+        alt
+        title
+        base64
       }
     }
     author {
@@ -15,28 +24,18 @@ query HomePage {
         responsiveImage(
           imgixParams: { fm: jpg, fit: crop, w: 100, h: 100, sat: -100 }
         ) {
-          ...responsiveImageFragment
+          srcSet
+          webpSrcSet
+          sizes
+          src
+          width
+          height
+          aspectRatio
+          alt
+          title
+          base64
         }
       }
     }
   }
-}
-
-fragment responsiveImageFragment on ResponsiveImage {
-  srcSet
-  webpSrcSet
-  sizes
-  src
-  width
-  height
-  aspectRatio
-  alt
-  title
-  base64
-}
-
-fragment metaTagsFragment on Tag {
-  attributes
-  content
-  tag
 }

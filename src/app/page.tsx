@@ -50,13 +50,15 @@ export default async function Index() {
   const heroPost = allPosts[0]
   const morePosts = allPosts.slice(1)
 
+  console.log({ heroPost })
+
   return (
     <main>
       <Container>
         <Intro />
         <HeroPost
-          title={heroPost.title}
-          coverImage={heroPost.coverImage}
+          title={heroPost.title ?? ""}
+          coverImage={heroPost.coverImage?.responsiveImage?.src ?? ""}
           date={heroPost.date}
           author={heroPost.author}
           slug={heroPost.slug}
