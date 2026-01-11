@@ -51,6 +51,7 @@ export const NoFOUCScript = (storageKey: string) => {
   media.addEventListener("change", window.updateDOM)
 }
 
+// biome-ignore lint/suspicious/noRedeclare: taken from official nextjs starter https://github.com/vercel/next.js/blob/canary/examples/blog-starter/src/app/_components/theme-switcher.tsx
 let updateDOM: () => void
 
 /**
@@ -88,12 +89,14 @@ const Switch = () => {
       suppressHydrationWarning
       className={styles.switch}
       onClick={handleModeSwitch}
+      type="button"
     />
   )
 }
 
 const Script = memo(() => (
   <script
+    // biome-ignore lint/security/noDangerouslySetInnerHtml: taken from official nextjs starter https://github.com/vercel/next.js/blob/canary/examples/blog-starter/src/app/_components/theme-switcher.tsx
     dangerouslySetInnerHTML={{
       __html: `(${NoFOUCScript.toString()})('${STORAGE_KEY}')`,
     }}

@@ -3,12 +3,51 @@ import { HeroPost } from "@/app/_components/hero-post"
 import { Intro } from "@/app/_components/intro"
 import { MoreStories } from "@/app/_components/more-stories"
 import { getAllPosts } from "@/lib/api"
+import { HomePageDocument } from "~/graphql/types/graphql"
+import { metaTagsFragment, responsiveImageFragment } from "@/lib/fragments"
+import queryDatoCMS from "@/lib/queryDatoCMS"
 
-export default function Index() {
-  const allPosts = getAllPosts()
+// const PAGE_CONTENT_QUERY = `
+//   {
+//     site: _site {
+//       favicon: faviconMetaTags {
+//         ...metaTagsFragment
+//       }
+//     }
+//     blog {
+//       seo: _seoMetaTags {
+//         ...metaTagsFragment
+//       }
+//     }
+//     allPosts(orderBy: date_DESC, first: 20) {
+//       title
+//       slug
+//       excerpt
+//       date
+//       coverImage {
+//         responsiveImage(imgixParams: {fm: jpg, fit: crop, w: 2000, h: 1000 }) {
+//           ...responsiveImageFragment
+//         }
+//       }
+//       author {
+//         name
+//         picture {
+//           responsiveImage(imgixParams: {fm: jpg, fit: crop, w: 100, h: 100, sat: -100}) {
+//             ...responsiveImageFragment
+//           }
+//         }
+//       }
+//     }
+//   }
+
+//   ${metaTagsFragment}
+//   ${responsiveImageFragment}
+// `
+
+export default async function Index() {
+  const { allPosts } = await queryDatoCMS(HomePageDocument)
 
   const heroPost = allPosts[0]
-
   const morePosts = allPosts.slice(1)
 
   return (
