@@ -7,6 +7,7 @@ import { ThemeSwitcher } from "./_components/theme-switcher"
 import { draftMode } from "next/headers"
 import Alert from "@/app/_components/alert"
 import { SectionSeparator } from "./_components/section-separator"
+import { ThemeProvider } from "@/app/_components/theme-provider"
 
 import "./globals.css"
 
@@ -65,11 +66,13 @@ export default async function RootLayout({
       <body
         className={cn(inter.className, "dark:bg-slate-900 dark:text-slate-400")}
       >
-        <Alert preview={isEnabled} />
-        <ThemeSwitcher />
-        <div className="min-h-screen">{children}</div>
-        <SectionSeparator className="mt-0 mb-0" />
-        <Footer />
+        <ThemeProvider>
+          <Alert preview={isEnabled} />
+          <ThemeSwitcher />
+          <div className="min-h-screen">{children}</div>
+          <SectionSeparator className="mt-0 mb-0" />
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   )
