@@ -1,16 +1,17 @@
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
-import { getAllPosts, getPostBySlug } from "@/lib/api"
+// import { getAllPosts, getPostBySlug } from "@/lib/api"
 import { CMS_NAME } from "@/lib/constants"
 import markdownToHtml from "@/lib/markdownToHtml"
 import Alert from "@/app/_components/alert"
 import Container from "@/app/_components/container"
 import Header from "@/app/_components/header"
-import { PostBody } from "@/app/_components/post-body"
 import { PostHeader } from "@/app/_components/post-header"
 import { responsiveImageFragment, metaTagsFragment } from "@/lib/fragments"
 import { draftMode } from "next/headers"
 import queryDatoCMS from "@/lib/queryDatoCMS"
+import { PostBySlugDocument } from "~/graphql/types/graphql"
+import { PostPage } from "@/app/_components/post-page"
 
 const PAGE_CONTENT_QUERY = `
   query PostBySlug($slug: String) {
@@ -23,8 +24,6 @@ const PAGE_CONTENT_QUERY = `
       seo: _seoMetaTags {
         ...metaTagsFragment
       }
-      title
-      slug
       content {
         value
         blocks {
@@ -36,23 +35,6 @@ const PAGE_CONTENT_QUERY = `
                 ...responsiveImageFragment
               }
             }
-          }
-        }
-      }
-      date
-      ogImage: coverImage{
-        url(imgixParams: {fm: jpg, fit: crop, w: 2000, h: 1000 })
-      }
-      coverImage {
-        responsiveImage(imgixParams: {fm: jpg, fit: crop, w: 2000, h: 1000 }) {
-          ...responsiveImageFragment
-        }
-      }
-      author {
-        name
-        picture {
-          responsiveImage(imgixParams: {fm: jpg, fit: crop, w: 100, h: 100, sat: -100}) {
-            ...responsiveImageFragment
           }
         }
       }
@@ -89,12 +71,15 @@ export default async function Page({
   const { isEnabled } = await draftMode()
   const { slug } = await params
 
+  const { post } = await queryDatoCMS(PostBySlugDocument, { slug }, isEnabled)
+  console.log({ post })
+
   // const pageRequest = await getPageRequest(slug)
-  const data = await queryDatoCMS(PAGE_CONTENT_QUERY, { slug })
+  // const data = await queryDatoCMS(PAGE_CONTENT_QUERY, { slug })
 
-  console.log({ data })
+  // console.log({ data })
 
-  return <div>Hello</div>
+  // return <div>Hello</div>
 
   // if (isEnabled) {
   //   return (
@@ -109,7 +94,7 @@ export default async function Page({
   //   );
   // }
 
-  // return <PostPage data={data} />
+  return <PostPage post={post} />
 }
 
 // export default async function Post(props: Params) {
@@ -141,35 +126,35 @@ export default async function Page({
 //   )
 // }
 
-type Params = {
-  params: Promise<{
-    slug: string
-  }>
-}
+// type Params = {
+//   params: Promise<{
+//     slug: string
+//   }>
+// }
 
-export async function generateMetadata(props: Params): Promise<Metadata> {
-  const params = await props.params
-  const post = getPostBySlug(params.slug)
+// export async function generateMetadata(props: Params): Promise<Metadata> {
+//   const params = await props.params
+//   const post = getPostBySlug(params.slug)
 
-  if (!post) {
-    return notFound()
-  }
+//   if (!post) {
+//     return notFound()
+//   }
 
-  const title = `${post.title} | Next.js Blog Example with ${CMS_NAME}`
+//   const title = `${post.title} | Next.js Blog Example with ${CMS_NAME}`
 
-  return {
-    title,
-    openGraph: {
-      title,
-      images: [post.ogImage.url],
-    },
-  }
-}
+//   return {
+//     title,
+//     openGraph: {
+//       title,
+//       images: [post.ogImage.url],
+//     },
+//   }
+// }
 
-export async function generateStaticParams() {
-  const posts = getAllPosts()
+// export async function generateStaticParams() {
+//   const posts = getAllPosts()
 
-  return posts.map((post) => ({
-    slug: post.slug,
-  }))
-}
+//   return posts.map((post) => ({
+//     slug: post.slug,
+//   }))
+// }
