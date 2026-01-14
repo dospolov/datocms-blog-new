@@ -3,6 +3,7 @@ import Header from "./header"
 import { PostHeader } from "./post-header"
 import { PostBody } from "./post-body"
 import { MoreStories } from "./more-stories"
+import Container from "./container"
 
 export function PostPage({
   post,
@@ -12,7 +13,7 @@ export function PostPage({
   morePosts: PostBySlugQuery["morePosts"]
 }) {
   return (
-    <div className="max-w-2xl mx-auto">
+    <Container>
       <Header />
       <article>
         <PostHeader
@@ -25,6 +26,6 @@ export function PostPage({
       </article>
       <hr className="border-accent-2 mt-28 mb-24" />
       {morePosts.length > 0 && <MoreStories posts={morePosts} />}
-    </div>
+    </Container>
   )
 }
