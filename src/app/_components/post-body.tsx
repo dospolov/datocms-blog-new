@@ -6,8 +6,6 @@ type PostFromQuery = NonNullable<PostBySlugQuery["post"]>
 type ContentFromQuery = PostFromQuery["content"]
 
 export function PostBody({ content }: { content: ContentFromQuery }) {
-  if (!content) return null
-
   return (
     <div className="max-w-2xl mx-auto">
       <div className="prose prose-lg dark:prose-invert" id="main-content">
