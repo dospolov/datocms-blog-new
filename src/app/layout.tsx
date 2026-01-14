@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils"
 import { ThemeSwitcher } from "./_components/theme-switcher"
 import { draftMode } from "next/headers"
 import Alert from "@/app/_components/alert"
+import { SectionSeparator } from "./_components/section-separator"
 
 import "./globals.css"
 
@@ -67,6 +68,7 @@ export default async function RootLayout({
         <Alert preview={isEnabled} />
         <ThemeSwitcher />
         <div className="min-h-screen">{children}</div>
+        <SectionSeparator className="mt-0 mb-0" />
         <Footer />
       </body>
     </html>

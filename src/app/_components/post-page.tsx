@@ -4,6 +4,7 @@ import { PostHeader } from "./post-header"
 import { PostBody } from "./post-body"
 import { MoreStories } from "./more-stories"
 import Container from "./container"
+import { SectionSeparator } from "./section-separator"
 
 export function PostPage({
   post,
@@ -24,7 +25,7 @@ export function PostPage({
         />
         <PostBody content={post?.content} />
       </article>
-      <hr className="border-accent-2 mt-28 mb-24" />
+      <SectionSeparator />
       {morePosts.length > 0 && <MoreStories posts={morePosts} />}
     </Container>
   )
