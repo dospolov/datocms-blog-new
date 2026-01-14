@@ -5,7 +5,7 @@ import { Inter } from "next/font/google"
 import cn from "classnames"
 import { ThemeSwitcher } from "./_components/theme-switcher"
 import { draftMode } from "next/headers"
-import Alert from "@/components/alert"
+import Alert from "@/app/_components/alert"
 
 import "./globals.css"
 

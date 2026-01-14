@@ -1,15 +1,18 @@
-import type { Author } from "@/interfaces/author"
 import Link from "next/link"
 import Avatar from "./avatar"
 import CoverImage from "./cover-image"
 import DateFormatter from "./date-formatter"
+import type { PostBySlugQuery } from "~/graphql/types/graphql"
+
+type PostFromQuery = NonNullable<PostBySlugQuery["post"]>
+type AuthorFromQuery = PostFromQuery["author"]
 
 type Props = {
   title: string
   coverImage: string
   date: string
   excerpt: string
-  author: Author
+  author: AuthorFromQuery
   slug: string
 }
 
