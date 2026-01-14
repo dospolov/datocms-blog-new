@@ -22,7 +22,7 @@ export function PostHeader({ title, coverImage, date, author }: Props) {
         <div className="hidden md:block md:mb-12">
           <Avatar
             name={author.name}
-            picture={author.picture?.responsiveImage?.src ?? ""}
+            src={author.picture?.responsiveImage?.src ?? ""}
           />
         </div>
       )}
@@ -34,7 +34,7 @@ export function PostHeader({ title, coverImage, date, author }: Props) {
           <div className="block md:hidden mb-6">
             <Avatar
               name={author.name}
-              picture={author.picture?.responsiveImage?.src ?? ""}
+              src={author.picture?.responsiveImage?.src ?? ""}
             />
           </div>
         )}
