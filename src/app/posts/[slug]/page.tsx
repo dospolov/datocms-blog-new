@@ -9,7 +9,11 @@ export default async function Page({
   const { isEnabled } = await draftMode()
   const { slug } = await params
 
-  const { post } = await queryDatoCMS(PostBySlugDocument, { slug }, isEnabled)
+  const { post, morePosts } = await queryDatoCMS(
+    PostBySlugDocument,
+    { slug },
+    isEnabled,
+  )
 
-  return <PostPage post={post} />
+  return <PostPage post={post} morePosts={morePosts ?? []} />
 }

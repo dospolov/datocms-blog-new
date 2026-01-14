@@ -1,72 +1,140 @@
-# A statically generated blog example using Next.js, Markdown, and TypeScript
+<!--datocms-autoinclude-header start-->
 
-This is the existing [blog-starter](https://github.com/vercel/next.js/tree/canary/examples/blog-starter) plus TypeScript.
+<a href="https://www.datocms.com/"><img src="https://www.datocms.com/images/full_logo.svg" height="60"></a>
 
-This example showcases Next.js's [Static Generation](https://nextjs.org/docs/app/building-your-application/routing/layouts-and-templates) feature using Markdown files as the data source.
+👉 [Visit the DatoCMS homepage](https://www.datocms.com) or see [What is DatoCMS?](#what-is-datocms)
 
-The blog posts are stored in `/_posts` as Markdown files with front matter support. Adding a new Markdown file in there will create a new blog post.
+---
 
-To create the blog posts we use [`remark`](https://github.com/remarkjs/remark) and [`remark-html`](https://github.com/remarkjs/remark-html) to convert the Markdown files into an HTML string, and then send it down as a prop to the page. The metadata of every post is handled by [`gray-matter`](https://github.com/jonschlinkert/gray-matter) and also sent in props to the page.
+<!--datocms-autoinclude-header end-->
+
+# A Blog example using Next.js and DatoCMS
+
+This example showcases a Next.js Blog using [DatoCMS](https://www.datocms.com/) as the data source. It fully supports [Preview Mode](https://www.datocms.com/docs/next-js/setting-up-next-js-preview-mode) with [DatoCMS real-time updates](https://www.datocms.com/docs/next-js/real-time-updates).
+
+The purpose of this repo is to have a quick start reference that can be set up with the "one-click" button below.
 
 ## Demo
 
-[https://next-blog-starter.vercel.app/](https://next-blog-starter.vercel.app/)
+Have a look at the end result live:
 
-## Deploy your own
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/next.js/tree/canary/examples/blog-starter&project-name=blog-starter&repository-name=blog-starter)
-
-### Related examples
-
-- [AgilityCMS](/examples/cms-agilitycms)
-- [Builder.io](/examples/cms-builder-io)
-- [ButterCMS](/examples/cms-buttercms)
-- [Contentful](/examples/cms-contentful)
-- [Cosmic](/examples/cms-cosmic)
-- [DatoCMS](/examples/cms-datocms)
-- [DotCMS](/examples/cms-dotcms)
-- [Drupal](/examples/cms-drupal)
-- [Enterspeed](/examples/cms-enterspeed)
-- [Ghost](/examples/cms-ghost)
-- [GraphCMS](/examples/cms-graphcms)
-- [Kontent.ai](/examples/cms-kontent-ai)
-- [MakeSwift](/examples/cms-makeswift)
-- [Payload](/examples/cms-payload)
-- [Plasmic](/examples/cms-plasmic)
-- [Prepr](/examples/cms-prepr)
-- [Prismic](/examples/cms-prismic)
-- [Sanity](/examples/cms-sanity)
-- [Sitecore XM Cloud](/examples/cms-sitecore-xmcloud)
-- [Sitefinity](/examples/cms-sitefinity)
-- [Storyblok](/examples/cms-storyblok)
-- [TakeShape](/examples/cms-takeshape)
-- [Tina](/examples/cms-tina)
-- [Umbraco](/examples/cms-umbraco)
-- [Umbraco heartcore](/examples/cms-umbraco-heartcore)
-- [Webiny](/examples/cms-webiny)
-- [WordPress](/examples/cms-wordpress)
-- [Blog Starter](/examples/blog-starter)
+### [https://nextjs-demo-bay.vercel.app/](https://nextjs-demo-bay.vercel.app/)
 
 ## How to use
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
+### Quick start
+
+1. [Create an account on DatoCMS](https://datocms.com).
+
+2. Make sure that you have set up the [Github integration on Vercel](https://vercel.com/docs/git/vercel-for-github).
+
+3. Let DatoCMS set everything up for you clicking this button:
+
+[![Deploy with DatoCMS](https://dashboard.datocms.com/deploy/button.svg)](https://dashboard.datocms.com/deploy?repo=datocms/nextjs-demo)
+
+### Local setup
+
+Once the setup of the project and repo is done, clone the repo locally.
+
+#### Set up environment variables
+
+In your DatoCMS' project, go to the **Settings** menu at the top and click **API tokens**.
+
+Then click **Read-only API token** and copy the token.
+
+Next, copy the `.env.local.example` file in this directory to `.env.local` (which will be ignored by Git):
 
 ```bash
-npx create-next-app --example blog-starter blog-starter-app
+cp .env.local.example .env.local
 ```
+
+Then set each variable inside `.env.local`:
+
+- `NEXT_DATOCMS_API_TOKEN` should be the API token you just copied.
+- `NEXT_DATOCMS_PREVIEW_SECRET` can be any random string (but avoid spaces), like `MY_SECRET` - this is used for the Preview Mode](https://www.datocms.com/docs/next-js/setting-up-next-js-preview-mode).
+
+Your `.env.local` file should look like this:
 
 ```bash
-yarn create next-app --example blog-starter blog-starter-app
+NEXT_DATOCMS_API_TOKEN=...
+NEXT_DATOCMS_PREVIEW_SECRET=...
 ```
+
+#### Run your project locally
 
 ```bash
-pnpm create next-app --example blog-starter blog-starter-app
+npm install
+npm run dev
 ```
 
-Your blog should be up and running on [http://localhost:3000](http://localhost:3000)! If it doesn't work, post on [GitHub discussions](https://github.com/vercel/next.js/discussions).
+Your blog should be up and running on [http://localhost:3000](http://localhost:3000)!
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+#### Try preview mode
 
-# Notes
+On DatoCMS, go to one of the posts you've created and:
 
-`blog-starter` uses [Tailwind CSS](https://tailwindcss.com) [(v3.0)](https://tailwindcss.com/blog/tailwindcss-v3).
+- **Update the title**. For example, you can add `[Draft]` in front of the title.
+- Click **Save**, but **DO NOT** click **Publish**. By doing this, the post will be in the draft state.
+
+(If it doesn't become draft, you need to go to the model settings for `Post`, go to **Additional Settings**, and turn on **Enable draft/published system**.)
+
+Now, if you go to the post page on localhost, you won't see the updated title. However, if you use the **Preview Mode**, you'll be able to see the change ([Documentation](https://www.datocms.com/docs/next-js/setting-up-next-js-preview-mode)).
+
+To enable the Preview Mode, go to this URL:
+
+```
+http://localhost:3000/api/draft?secret=<secret>
+```
+
+- `<secret>` should be the string you entered for `NEXT_DATOCMS_PREVIEW_SECRET`.
+- `<slug>` should be the post's `slug` attribute (you can check on DatoCMS).
+
+You should now be able to see the updated title. To exit the preview mode, you can click **Click here to exit preview mode** at the top.
+
+<!--datocms-autoinclude-footer start-->
+
+---
+
+# What is DatoCMS?
+
+<a href="https://www.datocms.com/"><img src="https://www.datocms.com/images/full_logo.svg" height="60" alt="DatoCMS - The Headless CMS for the Modern Web"></a>
+
+[DatoCMS](https://www.datocms.com/) is the REST & GraphQL Headless CMS for the modern web.
+
+Trusted by over 25,000 enterprise businesses, agencies, and individuals across the world, DatoCMS users create online content at scale from a central hub and distribute it via API. We ❤️ our [developers](https://www.datocms.com/team/best-cms-for-developers), [content editors](https://www.datocms.com/team/content-creators) and [marketers](https://www.datocms.com/team/cms-digital-marketing)!
+
+**Why DatoCMS?**
+
+- **API-First Architecture**: Built for both REST and GraphQL, enabling flexible content delivery
+- **Just Enough Features**: We believe in keeping things simple, and giving you [the right feature-set tools](https://www.datocms.com/features) to get the job done
+- **Developer Experience**: First-class TypeScript support with powerful developer tools
+
+**Getting Started:**
+
+- ⚡️ [Create Free Account](https://dashboard.datocms.com/signup) - Get started with DatoCMS in minutes
+- 🔖 [Documentation](https://www.datocms.com/docs) - Comprehensive guides and API references
+- ⚙️ [Community Support](https://community.datocms.com/) - Get help from our team and community
+- 🆕 [Changelog](https://www.datocms.com/product-updates) - Latest features and improvements
+
+**Official Libraries:**
+
+- [**Content Delivery Client**](https://github.com/datocms/cda-client) - TypeScript GraphQL client for content fetching
+- [**REST API Clients**](https://github.com/datocms/js-rest-api-clients) - Node.js/Browser clients for content management
+- [**CLI Tools**](https://github.com/datocms/cli) - Command-line utilities for schema migrations (includes [Contentful](https://github.com/datocms/cli/tree/main/packages/cli-plugin-contentful) and [WordPress](https://github.com/datocms/cli/tree/main/packages/cli-plugin-wordpress) importers)
+
+**Official Framework Integrations**
+
+Helpers to manage SEO, images, video and Structured Text coming from your DatoCMS projects:
+
+- [**React Components**](https://github.com/datocms/react-datocms)
+- [**Vue Components**](https://github.com/datocms/vue-datocms)
+- [**Svelte Components**](https://github.com/datocms/datocms-svelte)
+- [**Astro Components**](https://github.com/datocms/astro-datocms)
+
+**Additional Resources:**
+
+- [**Plugin Examples**](https://github.com/datocms/plugins) - Example plugins we've made that extend the editor/admin dashboard
+- [**Starter Projects**](https://www.datocms.com/marketplace/starters) - Example website implementations for popular frameworks
+- [**All Public Repositories**](https://github.com/orgs/datocms/repositories?q=&type=public&language=&sort=stargazers)
+
+<!--datocms-autoinclude-footer end-->
