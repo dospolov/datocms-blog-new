@@ -5,6 +5,11 @@
     "clientKind": "git",
     "useIgnoreFile": false
   },
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
+    }
+  },
   "files": {
     "ignoreUnknown": false
   },
