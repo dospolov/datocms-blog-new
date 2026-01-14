@@ -1,11 +1,9 @@
 import { Post } from "@/interfaces/post"
 import { PostPreview } from "./post-preview"
+import type { PostRecord } from "~/graphql/types/graphql"
 
-type Props = {
-  posts: Post[]
-}
-
-export function MoreStories({ posts }: Props) {
+export function MoreStories({ posts }: { posts?: PostRecord[] }) {
+  if (!posts) return null
   return (
     <section>
       <h2 className="mb-8 text-5xl md:text-7xl font-bold tracking-tighter leading-tight">
