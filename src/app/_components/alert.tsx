@@ -1,5 +1,5 @@
 import Container from "@/app/_components/container"
-import cn from "classnames"
+import { cn } from "@/lib/utils"
 
 export default function Alert({ preview }: { preview: boolean }) {
   return (
