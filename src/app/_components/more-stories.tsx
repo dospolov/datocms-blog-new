@@ -1,8 +1,9 @@
-import { Post } from "@/interfaces/post"
 import { PostPreview } from "./post-preview"
-import type { PostRecord } from "~/graphql/types/graphql"
+import type { HomePageQuery } from "~/graphql/types/graphql"
 
-export function MoreStories({ posts }: { posts?: PostRecord[] }) {
+type PostFromQuery = HomePageQuery["allPosts"][number]
+
+export function MoreStories({ posts }: { posts?: PostFromQuery[] }) {
   if (!posts) return null
   return (
     <section>
@@ -13,12 +14,12 @@ export function MoreStories({ posts }: { posts?: PostRecord[] }) {
         {posts.map((post) => (
           <PostPreview
             key={post.slug}
-            title={post.title}
-            coverImage={post.coverImage}
+            title={post.title ?? ""}
+            coverImage={post.coverImage?.responsiveImage?.src ?? ""}
             date={post.date}
             author={post.author}
             slug={post.slug}
-            excerpt={post.excerpt}
+            excerpt={post.excerpt ?? ""}
           />
         ))}
       </div>

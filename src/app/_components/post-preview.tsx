@@ -1,4 +1,4 @@
-import { type Author } from "@/interfaces/author"
+import type { Author } from "@/interfaces/author"
 import Link from "next/link"
 import Avatar from "./avatar"
 import CoverImage from "./cover-image"
@@ -35,7 +35,10 @@ export function PostPreview({
         <DateFormatter dateString={date} />
       </div>
       <p className="text-lg leading-relaxed mb-4">{excerpt}</p>
-      <Avatar name={author.name} picture={author.picture} />
+      <Avatar
+        name={author.name}
+        picture={author.picture?.responsiveImage?.src ?? ""}
+      />
     </div>
   )
 }
