@@ -10,7 +10,7 @@ export function PostBody({ content }: { content: ContentFromQuery }) {
 
   return (
     <div className="max-w-2xl mx-auto">
-      <div className="prose prose-lg prose-blue" id="main-content">
+      <div className="prose prose-lg dark:prose-invert" id="main-content">
         <StructuredTextField
           data={content}
           renderBlock={({ record }) => {
