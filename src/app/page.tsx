@@ -4,9 +4,15 @@ import { Intro } from "@/app/_components/intro"
 import { MoreStories } from "@/app/_components/more-stories"
 import { HomePageDocument } from "~/graphql/types/graphql"
 import queryDatoCMS from "@/lib/queryDatoCMS"
+import { draftMode } from "next/headers"
 
 export default async function Index() {
-  const { allPosts } = await queryDatoCMS(HomePageDocument)
+  const { isEnabled: isDraft } = await draftMode()
+  console.log({ isDraft })
+  const data = await queryDatoCMS(HomePageDocument, {}, isDraft)
+  const allPosts = data.allPosts
+
+  console.log({ data })
 
   const heroPost = allPosts[0]
   const morePosts = allPosts.slice(1)

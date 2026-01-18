@@ -5,11 +5,11 @@ import { Inter } from "next/font/google"
 import { cn } from "@/lib/utils"
 import { ThemeSwitcher } from "./_components/theme-switcher"
 import { draftMode } from "next/headers"
-import Alert from "@/app/_components/alert"
 import { SectionSeparator } from "./_components/section-separator"
 import { ThemeProvider } from "@/app/_components/theme-provider"
-
+import ScrollToTop from "@/app/_components/scroll-to-top"
 import "./globals.css"
+import type { SiteLocale } from "~/graphql/types/graphql"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -26,7 +26,11 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const { isEnabled } = await draftMode()
+  const { isEnabled: isDraft } = await draftMode()
+
+  const resolvedParams = {
+    locale: "en" as SiteLocale,
+  }
 
   return (
     <html lang="en" suppressHydrationWarning>
@@ -67,9 +71,12 @@ export default async function RootLayout({
         className={cn(inter.className, "dark:bg-slate-900 dark:text-slate-400")}
       >
         <ThemeProvider>
-          <Alert preview={isEnabled} />
           <ThemeSwitcher />
           <div className="min-h-screen">{children}</div>
+          <ScrollToTop
+            globalPageProps={{ params: resolvedParams }}
+            isDraft={isDraft}
+          />
           <SectionSeparator className="mt-0 mb-0" />
           <Footer />
         </ThemeProvider>
